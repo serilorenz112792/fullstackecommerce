@@ -7,8 +7,9 @@ const app = express()
 
 app.use(express.json())
 
+const port = process.env.PORT || 3999
 const db = process.env.DB
-const db2 = process.env.DB2
+const db2 = process.env.MONGODB_URI || 'mongodb+srv://renz007:tracymcgradY007@cluster0-wuftm.mongodb.net/Shopify?retryWrites=true&w=majority'
 
 mongoose.connect(db2, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true, useUnifiedTopology: true }, () => {
     try {
@@ -34,9 +35,9 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
     try {
-        console.log(`Running to port ${process.env.PORT}`)
+        console.log(`Running to port ${port}`)
     }
     catch (err) {
         console.log(err)
