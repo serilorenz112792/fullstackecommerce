@@ -1,0 +1,12 @@
+export const GET_ITEM = 'GET_ITEM'
+export const GET_ITEM_SUCCESS = 'GET_ITEM_SUCCESS'
+export const GET_ITEM_FAILED = 'GET_ITEM_FAILED'
+
+export const BUY_ITEM = 'BUY_ITEM'
+export const BUY_ITEM_SUCCESS = 'BUY_ITEM_SUCCESS'
+export const BUY_ITEM_FAILED = 'BUY_ITEM_FAILED'
+
+export const REMOVE_ITEM = 'REMOVE_ITEM'
+export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS'
+
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
