@@ -9,7 +9,7 @@ app.use(express.json())
 
 const port = process.env.PORT || 3999
 const db = process.env.DB
-const db2 = process.env.MONGODB_URI || 'mongodb+srv://renz007:tracymcgradY007@cluster0-wuftm.mongodb.net/Shopify?retryWrites=true&w=majority'
+const db2 = process.env.MONGODB_URI || process.env.DB2
 
 mongoose.connect(db2, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true, useUnifiedTopology: true }, () => {
     try {
