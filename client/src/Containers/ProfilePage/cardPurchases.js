@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Card, CardMedia, CardContent, CardActionArea, Typography, Collapse
     , Button
@@ -6,6 +6,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { currency } from '../../util/currency'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import dotenv from 'dotenv'
+dotenv.config()
 const useStyles = makeStyles({
     card: {
         position: 'relative'
@@ -55,7 +57,16 @@ const CardComponent = (props) => {
     const classes = useStyles()
     const { data, handleModal } = props
     const [collapse, setCollapse] = useState(false)
-    const imgPath = `http://localhost:3999/${data && data.imgPath}`
+    const [imgPath, setImgPath] = useState('')
+    useEffect(() => {
+        if (process.env.NODE_ENV === "production") {
+            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${data && data.imgPath}`)
+        }
+        else {
+            setImgPath(`http://localhost:3999/${data && data.imgPath}`)
+        }
+    }, [imgPath])
+    //const imgPath = `http://localhost:3999/${data && data.imgPath}`
     const handleCollapse = () => {
         setCollapse(!collapse)
     }

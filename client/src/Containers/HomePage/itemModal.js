@@ -10,6 +10,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
 import { currency } from '../../util/currency'
+import dotenv from 'dotenv'
+dotenv.config()
 const useStyles = makeStyles({
     typography: {
         textAlign: 'center',
@@ -83,6 +85,7 @@ const ProductModal = (props) => {
     const [openSnack, setOpenSnack] = useState(false)
     const [severity, setSeverity] = useState('')
     const [btnStatus, setBtnStatus] = useState(true)
+    const [imgPath, setImgPath] = useState('')
 
     const [error, setError] = useState(false)
 
@@ -90,10 +93,15 @@ const ProductModal = (props) => {
     useEffect(() => {
         setModalState(state)
         setInd(index)
-
+        if (process.env.NODE_ENV === "production") {
+            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${data[ind] && data[ind].imgPath}`)
+        }
+        else {
+            setImgPath(`http://localhost:3999/${data[ind] && data[ind].imgPath}`)
+        }
 
     }, [modalState, state, role])
-    const imgPath = `http://localhost:3999/${data[ind] && data[ind].imgPath}`
+    //const imgPath = `http://localhost:3999/${data[ind] && data[ind].imgPath}`
     const handleNext = () => {
         let lastIndex = data.length - 1
         setInd(ind + 1)

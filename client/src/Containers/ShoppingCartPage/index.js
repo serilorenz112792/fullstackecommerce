@@ -14,6 +14,8 @@ import ConfirmationModal from './confirmationModal'
 import { currency } from '../../util/currency'
 import EmptyCart from '../../images/Empty_Shopping_Cart.jpg'
 import ShopIcon from '@material-ui/icons/Shop'
+import dotenv from 'dotenv'
+dotenv.config()
 const useStyles = makeStyles({
     typography: {
         textAlign: 'center',
@@ -87,11 +89,17 @@ const ShoppingCartPage = (props) => {
     const [index, setIndex] = useState(0)
     const [actionType, setActionType] = useState('')
     const [userId, setUserId] = useState('')
-
+    const [imgPathUrl, setImgPathUrl] = useState('')
     useEffect(() => {
         GetItem()
         setUserId(uid && uid._id)
         ClearMsg()
+        if (process.env.NODE_ENV === "production") {
+            setImgPathUrl('https://thawing-savannah-18279.herokuapp.com/')
+        }
+        else {
+            setImgPathUrl('http://localhost:3999/')
+        }
     }, [uid, userId])
     //const imgPath = `http://localhost:3999/${cart && cart.cartItems.imgPath}`
     //console.log("cart", cart)
@@ -135,7 +143,7 @@ const ShoppingCartPage = (props) => {
                                                         alt="item img"
                                                         height="250"
                                                         width="250"
-                                                        image={`http://localhost:3999/${obj.imgPath}`}
+                                                        image={`${imgPathUrl}${obj.imgPath}`}
                                                         title={obj.productName} />
                                                 </div>
                                             </Grid>

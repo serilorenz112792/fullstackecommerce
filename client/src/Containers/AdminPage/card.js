@@ -8,6 +8,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import EditIcon from '@material-ui/icons/Edit'
 import { currency } from '../../util/currency'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import dotenv from 'dotenv'
+dotenv.config()
 const useStyles = makeStyles({
     actionTypography: {
         fontFamily: 'fantasy',
@@ -78,12 +80,19 @@ const Cards = (props) => {
     const classes = useStyles()
     const { item, handleEditModal, handleDeleteModal, backgroundColor } = props
     const [collapse, setCollapse] = useState(false)
+    const [imgPath, setImgPath] = useState('')
     const handleCollapse = () => {
         setCollapse(!collapse)
 
     }
     useEffect(() => {
-
+        if (process.env.NODE_ENV === 'production') {
+            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${item.imgPath}`)
+        }
+        else {
+            console.log("dev")
+            setImgPath(`http://localhost:3999/${item.imgPath}`)
+        }
     }, [props, item])
     return (
         <Card style={{ backgroundColor }}>
@@ -94,7 +103,7 @@ const Cards = (props) => {
                     alt="item img"
                     height="150"
                     width="150"
-                    image={`http://localhost:3999/${item.imgPath}`}
+                    image={imgPath}
                     title={item.productName} />
 
                 <Typography onClick={handleCollapse} className={classes.actionTypography} variant="body1">{!collapse ? 'Edit or Delete?' : 'Hide Details'}</Typography>
