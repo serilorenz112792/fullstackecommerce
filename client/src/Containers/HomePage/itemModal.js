@@ -94,7 +94,7 @@ const ProductModal = (props) => {
         setModalState(state)
         setInd(index)
         if (process.env.NODE_ENV === "production") {
-            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${data[ind] && data[ind].imgPath}`)
+            setImgPath(`https://ecommerce-renz.herokuapp.com/${data[ind] && data[ind].imgPath}`)
         }
         else {
             setImgPath(`http://localhost:3999/${data[ind] && data[ind].imgPath}`)

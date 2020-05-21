@@ -95,7 +95,7 @@ const ShoppingCartPage = (props) => {
         setUserId(uid && uid._id)
         ClearMsg()
         if (process.env.NODE_ENV === "production") {
-            setImgPathUrl('https://thawing-savannah-18279.herokuapp.com/')
+            setImgPathUrl('https://ecommerce-renz.herokuapp.com/')
         }
         else {
             setImgPathUrl('http://localhost:3999/')

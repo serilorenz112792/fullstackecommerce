@@ -87,10 +87,10 @@ const Cards = (props) => {
     }
     useEffect(() => {
         if (process.env.NODE_ENV === 'production') {
-            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${item.imgPath}`)
+            //setImgPath(`https://thawing-savannah-18279.herokuapp.com/${item.imgPath}`)
+            setImgPath(`https://ecommerce-renz.herokuapp.com/${item.imgPath}`)
         }
         else {
-            console.log("dev")
             setImgPath(`http://localhost:3999/${item.imgPath}`)
         }
     }, [props, item])
