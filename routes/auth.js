@@ -9,6 +9,14 @@ require('dotenv').config()
 //@ POST
 //@ DESC - login
 //@ PUBLIC
+let secret_key = ''
+if (process.env.NODE_ENV === 'production') {
+    secret_key = process.env.SECRET_KEY
+}
+else {
+    secret_key = process.env.SECRET_KEY
+}
+
 router.post('/login', (req, res) => {
     const { email, password } = req.body
     if (email === '' || password === '') return res.status(400).json({ msg: 'Username and password is required!' })
@@ -21,7 +29,7 @@ router.post('/login', (req, res) => {
                 id: user._id,
                 name: user.name
             },
-                process.env.SECRET_KEY, { expiresIn: '45m' },
+                secret_key, { expiresIn: '45m' },
                 (err, token) => {
                     if (err) return res.status(400).json({ error: err })
                     res.status(200).json({

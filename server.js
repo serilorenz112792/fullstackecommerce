@@ -7,13 +7,17 @@ const app = express()
 
 app.use(express.json())
 
-const port = process.env.PORT || 3999
+
+
 const db = process.env.DB
+let port = ''
 let db2 = ''
 if (process.env.NODE_ENV === 'production') {
+    port = process.env.PORT
     db2 = process.env.MONGODB_URI
 }
 else {
+    port = 3999
     db2 = process.env.DB2
 }
 
