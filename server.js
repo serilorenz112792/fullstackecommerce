@@ -9,7 +9,13 @@ app.use(express.json())
 
 const port = process.env.PORT || 3999
 const db = process.env.DB
-const db2 = process.env.MONGODB_URI || process.env.DB2
+let db2 = ''
+if (process.env.NODE_ENV === 'production') {
+    db2 = process.env.MONGODB_URI
+}
+else {
+    db2 = process.env.DB2
+}
 
 mongoose.connect(db2, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true, useUnifiedTopology: true }, () => {
     try {
