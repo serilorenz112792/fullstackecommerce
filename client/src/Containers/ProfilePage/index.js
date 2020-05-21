@@ -17,6 +17,12 @@ const useStyles = makeStyles({
     },
     expansionGrid: {
         paddingTop: 30
+    },
+    name: {
+        fontFamily: 'san serif',
+        fontStyle: 'italic',
+        color: 'red',
+        paddingTop: 30
     }
 })
 const ProfilePage = (props) => {
@@ -46,6 +52,9 @@ const ProfilePage = (props) => {
     return (
         <Container>
             <ConfirmationModal data={details} RemoveItem={handleRemoveItem} state={modalState} handleClose={handleCloseModal} />
+            <Grid item xs={12}>
+                <Typography className={classes.name} variant="h4">{`Welcome ${auth.user && auth.user.name ? auth.user && auth.user.name : ''}`}</Typography>
+            </Grid>
             <Grid className={classes.expansionGrid} container item xs={12}>
                 <ExpansionPanel className={classes.expansionPanel}>
                     <ExpansionPanelSummary
