@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Card, CardMedia, CardContent, CardActionArea, Typography
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import dotenv from 'dotenv'
+dotenv.config()
 const useStyles = makeStyles({
     typography: {
         textAlign: 'center',
@@ -25,8 +27,16 @@ const useStyles = makeStyles({
 const CardComponent = (props) => {
     const classes = useStyles()
     const { data } = props
-    const imgPath = `http://localhost:3999/${data && data.imgPath}`
-
+    const [imgPath, setImgPath] = useState('')
+    //let imgPath = ''
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'production') {
+            setImgPath(`https://thawing-savannah-18279.herokuapp.com/${data && data.imgPath}`)
+        }
+        else {
+            setImgPath(`http://localhost:3999/${data && data.imgPath}`)
+        }
+    }, [imgPath, data])
     return (
         <Card>
             <CardActionArea>

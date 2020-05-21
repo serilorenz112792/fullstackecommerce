@@ -27,8 +27,7 @@ router.post('/login', (req, res) => {
             if (!isMatch) return res.status(400).json({ msg: 'Username and password is incorrect!' })
             jwt.sign({
                 id: user._id,
-                name: user.name,
-                secretKey: secret_key
+                name: user.name
             },
                 secret_key, { expiresIn: '45m' },
                 (err, token) => {
