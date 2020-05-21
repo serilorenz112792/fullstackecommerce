@@ -65,7 +65,7 @@ const CardComponent = (props) => {
         else {
             setImgPath(`http://localhost:3999/${data && data.imgPath}`)
         }
-    }, [imgPath])
+    }, [imgPath, data])
     //const imgPath = `http://localhost:3999/${data && data.imgPath}`
     const handleCollapse = () => {
         setCollapse(!collapse)
