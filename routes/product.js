@@ -51,6 +51,17 @@ router.put('/buy/:id', auth, async (req, res) => {
         currency: 'USD'
     })
     const { productName, price, category, quantity, userId, email, purchasedId } = req.body
+
+
+    const product = await Product.findById(req.params.id)
+    let imgUrl = ''
+    if (process.env.NODE_ENV === "production") {
+        imgUrl = `https://ecommerce-renz.herokuapp.com/${product.imgPath}`
+    }
+    else {
+        imgUrl = `http://localhost:3999/${product.imgPath}`
+    }
+    console.log("IMAGE URL", imgUrl)
     const mailOptions = {
         from: 'serilorenz112792@gmail.com',
         to: email,
@@ -71,9 +82,12 @@ router.put('/buy/:id', auth, async (req, res) => {
                     <span style="color:violet;font-weight:bold;font-family:sans-serif;font-style:italic" id="quantity">${quantity}</span>
                    </form> 
                </span>
+               <div style="width:200;height:200">
+                    <img src="imgUrl" alt="product image" />
+                    <img src={imgUrl} alt="product image" />
+               </div>
               `
     }
-    const product = await Product.findById(req.params.id)
 
     const purchasedProduct = {
         productId: req.params.id, productName, price, category, quantity, imgPath: product.imgPath, purchasedId
