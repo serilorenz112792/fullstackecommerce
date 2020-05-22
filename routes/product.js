@@ -61,7 +61,6 @@ router.put('/buy/:id', auth, async (req, res) => {
     else {
         imgUrl = `http://localhost:3999/${product.imgPath}`
     }
-    console.log("IMAGE URL", imgUrl)
     const mailOptions = {
         from: 'serilorenz112792@gmail.com',
         to: email,
@@ -82,11 +81,15 @@ router.put('/buy/:id', auth, async (req, res) => {
                     <span style="color:violet;font-weight:bold;font-family:sans-serif;font-style:italic" id="quantity">${quantity}</span>
                    </form> 
                </span>
-               <div style="width:200;height:200">
-                    <img src="imgUrl" alt="product image" />
-                    <img src={imgUrl} alt="product image" />
-               </div>
-              `
+                
+              `,
+        attachments: [
+            {
+                filename: 'image.png',
+                path: `https://ecommerce-renz.herokuapp.com/${product.imgPath}`,
+                id: 'image'
+            }
+        ]
     }
 
     const purchasedProduct = {
