@@ -11,6 +11,7 @@ import {
 import CardComponent from './cardComponent'
 import ProductModal from './itemModal'
 import { makeStyles } from '@material-ui/core/styles'
+
 const useStyles = makeStyles({
     root: {
         display: 'flex',
@@ -159,7 +160,7 @@ const HomePage = (props) => {
         <Container>
             <ProductModal role={auth.user && auth.user.role} handleClose={handleCloseModal} page={currentPage} data={currentItem} index={index} state={openItemModal} />
             <Grid style={{ paddingTop: 30 }} container spacing={3}>
-                <Grid container justify="center" item xs={5}>
+                <Grid container justify="center" item lg={5} md={5} xs={12}>
                     <FormControl>
                         <InputLabel htmlFor="category">Category</InputLabel>
                         <Select
@@ -174,7 +175,7 @@ const HomePage = (props) => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid container item xs={7}>
+                <Grid container item lg={7} md={7} xs={12}>
                     <TextField onChange={handleSearch} fullWidth variant="outlined" placeholder="Search an item"></TextField>
                 </Grid>
             </Grid>
@@ -185,7 +186,7 @@ const HomePage = (props) => {
                             <Grid container justify="center" spacing={3}>
                                 {
                                     currentItem.map((obj, ind) =>
-                                        <Grid onClick={() => handleSelectProduct(obj, ind)} item xs={4} key={obj._id}>
+                                        <Grid onClick={() => handleSelectProduct(obj, ind)} item lg={4} md={6} xs={12} key={obj._id}>
                                             <CardComponent data={obj} />
                                         </Grid>
 

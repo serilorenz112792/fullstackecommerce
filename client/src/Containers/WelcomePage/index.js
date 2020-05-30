@@ -20,7 +20,9 @@ const useStyles = makeStyles({
         textAlign: 'center',
         fontFamily: 'san serif',
         fontStyle: 'italic',
-        color: 'black'
+        color: 'black',
+        width: 'inherit'
+
     },
     bgi: {
         width: '100%',
@@ -53,8 +55,10 @@ const useStyles = makeStyles({
     text: {
         textAlign: 'center',
         fontFamily: 'san serif',
-        fontSize: 20
+        fontSize: 20,
+
     },
+
     instructionsBtn: {
         color: 'orange',
         fontFamily: 'san serif',
@@ -67,6 +71,7 @@ const useStyles = makeStyles({
     }
 })
 const WelcomePage = (props) => {
+
     const classes = useStyles()
     const [modalState, setModalState] = useState(false)
     const handleOpenModal = () => {
@@ -92,19 +97,22 @@ const WelcomePage = (props) => {
                                     <Typography className={classes.hello} variant="h4">HELLO & WELCOME</Typography>
                                 </Grid>
                                 <Grid className={classes.gridDetails} justify="center" container>
-                                    <Grid justify="center" container item xs={4}>
+                                    <Grid justify="center" container item lg={4} xs={12}>
                                         <Avatar className={classes.avatar} alt="Renz Serilo" src={me} />
                                     </Grid>
-                                    <Grid item xs={8}>
+                                    <Grid item lg={8} xs={12}>
                                         <Grid container>
-                                            <Grid item xs={12}>
-                                                <Typography className={classes.text} variant="body1">
-                                                    A simple e-commerce web application using <span className={classes.mongo}>MongoDB</span>, <span className={classes.express}>Express</span>,
-                                            <span className={classes.react}> React</span> and <span className={classes.nodeJs}>Node Js</span>.
+                                            <Grid item lg={12} xs={12}>
+                                                <div style={{ width: 'inherit' }}>
+                                                    <Typography className={classes.text} variant="body1">
+                                                        A simple e-commerce web application using <span className={classes.mongo}>MongoDB</span>,
+                                                    <span className={classes.react}> React</span>  <span className={classes.express}>Express</span>, and <span className={classes.nodeJs}>Node Js</span>.
 
                                                 </Typography>
+                                                </div>
+
                                             </Grid>
-                                            <Grid className={classes.instructionsBtnGrid} item xs={12}>
+                                            <Grid className={classes.instructionsBtnGrid} item lg={12} xs={12}>
                                                 <Grid container justify="center">
                                                     <Button onClick={handleOpenModal} color="primary" className={classes.instructionsBtn} variant="contained">
                                                         Read Instructions

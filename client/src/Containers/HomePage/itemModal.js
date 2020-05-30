@@ -7,11 +7,14 @@ import {
     Dialog, DialogTitle, DialogContent, DialogActions, Typography,
     CardMedia, Grid, Button, Paper, Collapse, TextField, Snackbar
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles'
+import MuiAlert from '@material-ui/lab/Alert'
 import { currency } from '../../util/currency'
+import { CSSTransition, TransitionGroup } from "react-transition-group"
+import './home.css'
 import dotenv from 'dotenv'
 dotenv.config()
+
 const useStyles = makeStyles({
     typography: {
         textAlign: 'center',
@@ -69,6 +72,7 @@ const useStyles = makeStyles({
     dialogContent: {
         maxHeight: 400
     }
+
 
 })
 function Alert(props) {
@@ -198,74 +202,87 @@ const ProductModal = (props) => {
     const handleFocus = () => {
         setError(false)
     }
+
     return (
+
         <Dialog disableBackdropClick className={classes.container} open={modalState} onClose={handleCloseModal}>
             <Snackbar open={openSnack} autoHideDuration={3000} onClose={handleCloseSnack}>
                 <Alert onClose={handleCloseSnack} severity={severity}>
                     {msg}
                 </Alert>
             </Snackbar>
+
+
             <DialogTitle>
                 <Typography className={classes.typography}>{data[ind] && data[ind].productName}</Typography>
-            </DialogTitle>
-            <DialogContent className={classes.dialogContent}>
-                <Paper className={classes.imgPaper}>
-                    <Grid container justify="center">
-                        <div style={{ width: '90%', textAlign: 'center' }}>
-                            <CardMedia
-                                component="img"
-                                alt={data[ind] && data[ind].productName}
-                                height="250"
-                                width="250"
-                                image={imgPath}
-                                title={data[ind] && data[ind].productName}
-                            />
-                        </div>
-                    </Grid>
-                </Paper>
-                <Grid container justify="center">
-                    <Grid container item xs={12}>
-                        <Grid item xs={6}>
-                            <Typography align="right" variant="h6">Category:</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.typographyVal} align="left" variant="h6">{data[ind] && data[ind].category}</Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container item xs={12}>
-                        <Grid item xs={6}>
-                            <Typography align="right" variant="h6">Qty:</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.typographyVal} align="left" variant="h6">{data[ind] && data[ind].quantity === 0 ? <span style={{ color: 'red' }}>Out of stock *</span> : data[ind] && data[ind].quantity}</Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container item xs={12}>
-                        <Grid item xs={6}>
-                            <Typography align="right" variant="h6">Price:</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.price} align="left" variant="h6">{currency(data[ind] && data[ind].price)}</Typography>
-                        </Grid>
-                    </Grid>
 
-                    <Collapse in={collapse} timeout="auto" unmountOnExit>
+            </DialogTitle>
+            <CSSTransition
+                in={true}
+                appear={true}
+                timeout={700}
+                classNames="fade"
+                key={data[ind] && data[ind]._id}
+            >
+                <DialogContent className={classes.dialogContent}>
+                    <Paper className={classes.imgPaper}>
+                        <Grid container justify="center">
+                            <div style={{ width: '90%', textAlign: 'center' }}>
+                                <CardMedia
+                                    component="img"
+                                    alt={data[ind] && data[ind].productName}
+                                    height="250"
+                                    width="250"
+                                    image={imgPath}
+                                    title={data[ind] && data[ind].productName}
+                                />
+                            </div>
+                        </Grid>
+                    </Paper>
+                    <Grid container justify="center">
                         <Grid container item xs={12}>
-                            <Grid>
-                                <TextField onFocus={handleFocus} error={error} onChange={handleTotalQty} autoFocus align="left" variant="outlined" name="qty" placeholder="Enter quantity" label="Qty" />
-                            </Grid>
-                        </Grid>
-                        <Grid container justify="center" item xs={12}>
                             <Grid item xs={6}>
-                                <Typography align="right" variant="h6">Total Price:</Typography>
+                                <Typography align="right" variant="h6">Category:</Typography>
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography className={classes.totalPrice} align="left" variant="h6">{currency(totalPrice)}</Typography>
+                                <Typography className={classes.typographyVal} align="left" variant="h6">{data[ind] && data[ind].category}</Typography>
                             </Grid>
                         </Grid>
-                    </Collapse>
-                </Grid>
-            </DialogContent>
+                        <Grid container item xs={12}>
+                            <Grid item xs={6}>
+                                <Typography align="right" variant="h6">Qty:</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography className={classes.typographyVal} align="left" variant="h6">{data[ind] && data[ind].quantity === 0 ? <span style={{ color: 'red' }}>Out of stock *</span> : data[ind] && data[ind].quantity}</Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12}>
+                            <Grid item xs={6}>
+                                <Typography align="right" variant="h6">Price:</Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography className={classes.price} align="left" variant="h6">{currency(data[ind] && data[ind].price)}</Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Collapse in={collapse} timeout="auto" unmountOnExit>
+                            <Grid container item xs={12}>
+                                <Grid>
+                                    <TextField onFocus={handleFocus} error={error} onChange={handleTotalQty} autoFocus align="left" variant="outlined" name="qty" placeholder="Enter quantity" label="Qty" />
+                                </Grid>
+                            </Grid>
+                            <Grid container justify="center" item xs={12}>
+                                <Grid item xs={6}>
+                                    <Typography align="right" variant="h6">Total Price:</Typography>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography className={classes.totalPrice} align="left" variant="h6">{currency(totalPrice)}</Typography>
+                                </Grid>
+                            </Grid>
+                        </Collapse>
+                    </Grid>
+                </DialogContent>
+            </CSSTransition>
             <DialogActions>
                 <NavigateBeforeSharpIcon fontSize="large" color="secondary" className={classes.navigatePrev} onClick={handlePrev}>Previous</NavigateBeforeSharpIcon>
                 <NavigateNextSharpIcon fontSize="large" color="primary" className={classes.navigateNext} onClick={handleNext}>Next</NavigateNextSharpIcon>
@@ -292,7 +309,8 @@ const ProductModal = (props) => {
 
 
             </DialogActions>
-        </Dialog>
+        </Dialog >
+
     )
 }
 

@@ -200,8 +200,8 @@ const ShoppingCartPage = (props) => {
                 </Grid> :
                     <Grid >
                         <Grid item xs={12}>
-                            <div style={{ textAlign: 'center' }}>
-                                <img src={EmptyCart} alt="Empty Cart" />
+                            <div style={{ textAlign: 'center', width: 'inherit', height: 'auto' }}>
+                                <img style={{ width: '100%', height: 'auto' }} src={EmptyCart} alt="Empty Cart" />
                             </div>
                         </Grid>
                         <Grid style={{ paddingTop: 100 }} container justify="center" item xs={12}>

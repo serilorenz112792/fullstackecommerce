@@ -68,7 +68,7 @@ const ProfilePage = (props) => {
                                 <Grid container justify="center" spacing={3}>
                                     {
                                         profile.purchases.item && profile.purchases.item.map((obj, ind) =>
-                                            <Grid item xs={4} key={ind}>
+                                            <Grid item lg={4} md={6} xs={12} key={ind}>
                                                 <CardComponent index={ind} handleModal={() => handleConfirmationModal(obj, ind)} RemoveItem={handleRemoveItem} data={obj} />
                                             </Grid>)
 

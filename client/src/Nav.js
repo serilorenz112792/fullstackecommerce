@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Grid from '@material-ui/core/Grid'
 import { bindActionCreators } from 'redux'
 import { logoutAction } from './Containers/Authentication/LoginPage/action'
 import { connect } from 'react-redux'
@@ -13,6 +14,7 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Nav = (props) => {
+    const matches = useMediaQuery('(width: 400px)')
     const [pathName, setPathName] = useState('')
     const classes = useStyles();
     const { Logout, auth } = props
@@ -96,9 +99,10 @@ const Nav = (props) => {
         </div >
 
     return (
-        <div className={classes.root}>
+        <Grid container className={classes.root}>
             <AppBar position="fixed">
                 <Toolbar>
+
                     {auth && auth.isAuthenticated ? <Typography variant="h4" className={classes.title}>
                         <NavLink className={classes.home} to="/home">Products</NavLink>
                     </Typography> : <Typography variant="h4" className={classes.title}>
@@ -109,9 +113,10 @@ const Nav = (props) => {
                         customers
                         :
                         <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/login"><Button color="inherit">Login</Button></NavLink>}
+
                 </Toolbar>
             </AppBar>
-        </div>
+        </Grid>
     );
 }
 Nav.propTypes = {

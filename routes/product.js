@@ -86,8 +86,7 @@ router.put('/buy/:id', auth, async (req, res) => {
         attachments: [
             {
                 filename: 'image.png',
-                path: `https://ecommerce-renz.herokuapp.com/${product.imgPath}`,
-                id: 'image'
+                path: `https://ecommerce-renz.herokuapp.com/${product.imgPath}`
             }
         ]
     }

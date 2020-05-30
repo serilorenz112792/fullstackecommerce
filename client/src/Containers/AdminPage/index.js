@@ -76,7 +76,7 @@ const AdminPage = (props) => {
                 <Grid container item xs={12}>
                     {home.products && home.products.map((item, index) =>
 
-                        <Grid className={classes.gridCnt} item xs={4} key={index}>
+                        <Grid className={classes.gridCnt} item lg={4} md={6} xs={12} key={index}>
                             <Paper>
                                 <Cards backgroundColor={index % 2 === 0 ? 'white' : 'lightblue'} handleDeleteModal={() => handleDeleteModal(item)} handleEditModal={() => handleEditModal(item)} item={item} />
                             </Paper>
