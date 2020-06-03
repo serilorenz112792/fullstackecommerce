@@ -4,7 +4,11 @@ import {
     GET_PURCHASES_FAILED,
     REMOVE_PURCHASE,
     REMOVE_PURCHASE_SUCCESS,
-    REMOVE_PURCHASE_FAILED
+    REMOVE_PURCHASE_FAILED,
+    CHANGE_PASSWORD,
+    CHANGE_PASSWORD_SUCCESS,
+    CHANGE_PASSWORD_FAILED,
+    CLEAR_MESSAGE
 }
     from './constants'
 
@@ -49,3 +53,33 @@ export const removeItemFailedAction = data => {
         payload: data
     }
 }
+
+export const changePasswordAction = data => {
+
+    return {
+        type: CHANGE_PASSWORD,
+        payload: data
+    }
+}
+
+export const changePasswordSuccessAction = msg => {
+    return {
+        type: CHANGE_PASSWORD_SUCCESS,
+        payload: msg
+    }
+}
+
+export const changePasswordFailedAction = error => {
+    return {
+        type: CHANGE_PASSWORD_FAILED,
+        payload: error
+    }
+}
+
+export const clearMessageAction = () => {
+    return {
+        type: CLEAR_MESSAGE,
+
+    }
+}
+

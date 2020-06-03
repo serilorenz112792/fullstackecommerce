@@ -102,4 +102,38 @@ router.get('/purchases/:id', auth, async (req, res) => {
 })
 
 
+
+//@PUT
+//@DESC - change password
+//@PRIVATE
+router.put('/changepass/:id', async (req, res) => {
+
+    const { currentPassword, newPassword, confirmNewPassword } = req.body
+    if (currentPassword === '' || newPassword === '' || confirmNewPassword === '') return res.status(400).json({ msg: 'all fields are required!' })
+    if (newPassword !== confirmNewPassword) return res.status(400).json({ msg: 'new password and confirm password must match!' })
+
+    await User.findById(req.params.id)
+        .then((user) => {
+
+            bcrypt.compare(currentPassword, user.password).then((isMatch) => {
+                if (!isMatch) return res.status(400).json({ msg: 'incorrect password' })
+
+                bcrypt.hash(newPassword, 10, (err, hash) => {
+                    if (err) return res.status(400).json({ error: err })
+
+                    User.findByIdAndUpdate(user._id, { password: hash }).then(() => {
+                        res.status(200).json({ msg: 'change password success!' })
+                    }).catch(err => {
+                        res.status(400).json({ msg: 'Failed to change pass', error: err })
+                    })
+                })
+            }).catch(err => {
+                res.status(400).json({ error: err })
+            })
+        })
+        .catch(err => {
+            res.status(400).json({ error: err })
+        })
+})
+
 module.exports = router
