@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Grid, TextField, Button, Snackbar } from '@material-ui/core'
+import { Grid, TextField, Button, Snackbar, IconButton, InputAdornment } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { loginAction, clearMsgAction } from './action'
 import { makeStyles } from '@material-ui/core/styles';
+import VisibilityIcon from '@material-ui/icons/Visibility'
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 const useStyles = makeStyles({
     textField: {
         maxWidth: 500
@@ -22,6 +24,9 @@ const useStyles = makeStyles({
     },
     btnRegisterGrid: {
         paddingTop: 70
+    },
+    visiblilityIcons: {
+        color: 'black'
     }
 
 })
@@ -36,7 +41,8 @@ const LoginPage = (props) => {
     const [msg, setMsg] = useState('')
     const [severity, setSeverity] = useState('')
     const [errorText, setErrorText] = useState(false)
-    const [openSnack, setOpenSnack] = useState(false);
+    const [openSnack, setOpenSnack] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
     const handleLogin = (e) => {
         e.preventDefault()
         const userInfo = {
@@ -73,13 +79,38 @@ const LoginPage = (props) => {
 
         setErrorText(false)
     }
+    const handlePasswordVisibility = () => {
+        setIsVisible(!isVisible)
+    }
     return (
         <Grid>
             <Grid style={{ paddingTop: 50 }} container justify="center" item xs={12}>
                 <TextField onFocus={handleFocus} error={errorText} onChange={(e) => setEmail(e.target.value)} fullWidth className={classes.textField} autoFocus placeholder="Email" label="Email" id="email" type="email" />
             </Grid>
-            <Grid container justify="center" item xs={12}>
-                <TextField onFocus={handleFocus} error={errorText} onChange={(e) => setPassword(e.target.value)} fullWidth className={classes.textField} placeholder="Password" label="Password" id="password" type="password" />
+            <Grid container justify="center" item xs={12} >
+                <TextField
+                    onFocus={handleFocus}
+                    error={errorText}
+                    onChange={(e) =>
+                        setPassword(e.target.value)}
+                    fullWidth className={classes.textField}
+                    placeholder="Password"
+                    label="Password"
+                    id="password"
+                    type={!isVisible ? "password" : "text"}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <IconButton
+                                    aria-label='toggle password visibility'
+                                    onClick={handlePasswordVisibility}
+                                >
+                                    {isVisible ? <VisibilityIcon className={classes.visiblilityIcons} /> : <VisibilityOffIcon className={classes.visiblilityIcons} />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </Grid>
             <Grid className={classes.btnLoginGrid} container justify="center" item xs={12}>
 
