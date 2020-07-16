@@ -31,7 +31,7 @@ const transporter = require('../middlware/transporter')
 //@GET 
 //@DESC - get products
 //@PRIVATE
-router.get('/', auth, (req, res) => {
+router.get('/', (req, res) => {
     Product.find()
         .then((product) => {
             res.status(200).json(product)
@@ -128,7 +128,7 @@ router.put('/buy/:id', auth, async (req, res) => {
 //@POST
 //@DESC - add product for Admin users
 //@PRIVATE
-router.post('/add', upload.single('productImage'), (req, res) => {
+router.post('/add', upload.single('productImage'), auth, (req, res) => {
     let newProduct = {}
     if (req.file === undefined || req.file.path === undefined) {
         newProduct = new Product({
@@ -162,7 +162,7 @@ router.post('/add', upload.single('productImage'), (req, res) => {
 //@Desc - Edit Products
 //@PRIVATE
 
-router.put('/edit/:id', upload.single('productImage'), (req, res) => {
+router.put('/edit/:id', upload.single('productImage'), auth, (req, res) => {
     const { quantity, price, productName } = req.body
 
     let newProduct = {}
@@ -194,7 +194,7 @@ router.put('/edit/:id', upload.single('productImage'), (req, res) => {
 //@Desc - Delete a product
 //@PRIVATE
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id', auth, (req, res) => {
     Product.findByIdAndDelete(req.params.id)
         .then(() => {
             res.status(200).json({ msg: 'Item Deleted!' })

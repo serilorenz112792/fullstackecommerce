@@ -186,7 +186,7 @@ const HomePage = (props) => {
                             <Grid container justify="center" spacing={3}>
                                 {
                                     currentItem.map((obj, ind) =>
-                                        <Grid onClick={() => handleSelectProduct(obj, ind)} item lg={4} md={6} xs={12} key={obj._id}>
+                                        <Grid onClick={() => handleSelectProduct(obj, ind)} item lg={4} md={6} sm={6} xs={12} key={obj._id}>
                                             <CardComponent data={obj} />
                                         </Grid>
 

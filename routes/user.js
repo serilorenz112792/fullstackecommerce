@@ -106,7 +106,7 @@ router.get('/purchases/:id', auth, async (req, res) => {
 //@PUT
 //@DESC - change password
 //@PRIVATE
-router.put('/changepass/:id', async (req, res) => {
+router.put('/changepass/:id', auth, async (req, res) => {
 
     const { currentPassword, newPassword, confirmNewPassword } = req.body
     if (currentPassword === '' || newPassword === '' || confirmNewPassword === '') return res.status(400).json({ msg: 'all fields are required!' })
