@@ -84,39 +84,41 @@ const LoginPage = (props) => {
     }
     return (
         <Grid>
-            <Grid style={{ paddingTop: 50 }} container justify="center" item xs={12}>
-                <TextField onFocus={handleFocus} error={errorText} onChange={(e) => setEmail(e.target.value)} fullWidth className={classes.textField} autoFocus placeholder="Email" label="Email" id="email" type="email" />
-            </Grid>
-            <Grid container justify="center" item xs={12} >
-                <TextField
-                    onFocus={handleFocus}
-                    error={errorText}
-                    onChange={(e) =>
-                        setPassword(e.target.value)}
-                    fullWidth className={classes.textField}
-                    placeholder="Password"
-                    label="Password"
-                    id="password"
-                    type={!isVisible ? "password" : "text"}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position='end'>
-                                <IconButton
-                                    aria-label='toggle password visibility'
-                                    onClick={handlePasswordVisibility}
-                                >
-                                    {isVisible ? <VisibilityIcon className={classes.visiblilityIcons} /> : <VisibilityOffIcon className={classes.visiblilityIcons} />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </Grid>
-            <Grid className={classes.btnLoginGrid} container justify="center" item xs={12}>
+            <form onSubmit={handleLogin}>
+                <Grid style={{ paddingTop: 50 }} container justify="center" item xs={12}>
+                    <TextField onFocus={handleFocus} error={errorText} onChange={(e) => setEmail(e.target.value)} fullWidth className={classes.textField} autoFocus placeholder="Email" label="Email" id="email" type="email" />
+                </Grid>
+                <Grid container justify="center" item xs={12} >
+                    <TextField
+                        onFocus={handleFocus}
+                        error={errorText}
+                        onChange={(e) =>
+                            setPassword(e.target.value)}
+                        fullWidth className={classes.textField}
+                        placeholder="Password"
+                        label="Password"
+                        id="password"
+                        type={!isVisible ? "password" : "text"}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        aria-label='toggle password visibility'
+                                        onClick={handlePasswordVisibility}
+                                    >
+                                        {isVisible ? <VisibilityIcon className={classes.visiblilityIcons} /> : <VisibilityOffIcon className={classes.visiblilityIcons} />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
+                <Grid className={classes.btnLoginGrid} container justify="center" item xs={12}>
 
-                <Button onClick={handleLogin} variant="contained" color="primary" fullWidth className={classes.btn}>Login</Button>
+                    <Button type="submit" onClick={handleLogin} variant="contained" color="primary" fullWidth className={classes.btn}>Login</Button>
 
-            </Grid>
+                </Grid>
+            </form>
             <Grid className={classes.btnRegisterGrid} container justify="center" item xs={12}>
                 <Button onClick={handleRegister} variant="text" color="default" fullWidth className={classes.btnRegister}>Register</Button>
             </Grid>

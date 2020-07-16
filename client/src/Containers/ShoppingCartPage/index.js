@@ -200,11 +200,11 @@ const ShoppingCartPage = (props) => {
                 </Grid> :
                     <Grid >
                         <Grid item xs={12}>
-                            <div style={{ textAlign: 'center', width: 'inherit', height: 'auto' }}>
+                            <div style={{ textAlign: 'center', width: 'inherit', height: '90%' }}>
                                 <img style={{ width: '100%', height: 'auto' }} src={EmptyCart} alt="Empty Cart" />
                             </div>
                         </Grid>
-                        <Grid style={{ paddingTop: 100 }} container justify="center" item xs={12}>
+                        <Grid style={{ paddingTop: 10 }} container justify="center" item xs={12}>
                             <Button onClick={handleBuyProduct} className={classes.buyProductBtn} variant="contained">Buy Products<ShopIcon></ShopIcon></Button>
                         </Grid>
                     </Grid>
