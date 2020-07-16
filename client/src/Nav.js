@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid'
 import { bindActionCreators } from 'redux'
 import { logoutAction } from './Containers/Authentication/LoginPage/action'
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'orange'
     },
     cart: {
+        width: 100,
         backgroundColor: 'orange',
         color: 'white',
         "&:hover": {
@@ -39,11 +42,21 @@ const useStyles = makeStyles((theme) => ({
 
     },
     profile: {
+        width: 100,
         backgroundColor: 'pink',
         color: 'white',
         "&:hover": {
             //you want this to be the same as the backgroundColor above
             backgroundColor: 'violet'
+        }
+    },
+    logout: {
+        width: 100,
+        backgroundColor: 'gray',
+        color: 'white',
+        "&:hover": {
+            //you want this to be the same as the backgroundColor above
+            backgroundColor: 'lightgray'
         }
     },
     home: {
@@ -71,6 +84,16 @@ const useStyles = makeStyles((theme) => ({
             //you want this to be the same as the backgroundColor above
             backgroundColor: 'red'
         }
+    },
+    menuVisibility: {
+        [theme.breakpoints.only('xs')]: {
+            visibility: 'visible',
+        },
+    },
+    noMenu: {
+        [theme.breakpoints.only('xs')]: {
+            visibility: 'hidden',
+        },
     }
 }));
 
@@ -78,6 +101,7 @@ const Nav = (props) => {
     const matches = useMediaQuery('(width: 400px)')
     const [pathName, setPathName] = useState('')
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const { Logout, auth } = props
     useEffect(() => {
         setPathName(document.location.pathname)
@@ -87,11 +111,36 @@ const Nav = (props) => {
         localStorage.removeItem('cartProducts')
         Logout()
     }
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     const customers = auth.user && auth.user.role === 'Customer' ?
         <div>
-            <NavLink style={{ textDecoration: 'none' }} to="/profile"><Button variant="contained" className={classes.profile}>Profile <AccountCircleIcon /></Button></NavLink>
-            <NavLink style={{ textDecoration: 'none', paddingRight: 20, paddingLeft: 20 }} to="/cart"><Button variant="contained" className={classes.cart}>Cart <ShoppingCartIcon /></Button></NavLink>
-            <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/"><Button onClick={handleLogout} color="inherit">Logout</Button></NavLink>
+
+
+            <Button variant="contained" className={classes.admin} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <MenuIcon />
+            </Button>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+
+                <MenuItem onClick={handleClose}><NavLink style={{ textDecoration: 'none' }} to="/profile"><Button fullWidth variant="contained" className={classes.profile}>Profile <AccountCircleIcon /></Button></NavLink></MenuItem>
+                <MenuItem onClick={handleClose}><NavLink style={{ textDecoration: 'none' }} to="/cart"><Button fullWidth variant="contained" className={classes.cart}>Cart <ShoppingCartIcon /></Button></NavLink></MenuItem>
+                <MenuItem onClick={handleClose}><NavLink style={{ textDecoration: 'none', color: 'white' }} to="/"><Button fullWidth onClick={handleLogout} className={classes.logout}>Logout</Button></NavLink></MenuItem>
+
+
+
+            </Menu>
+
         </div> :
         <div>
             <NavLink style={{ textDecoration: 'none', paddingRight: 20, paddingLeft: 20 }} to="/admin"><Button variant="contained" className={classes.admin}>Admin</Button></NavLink>
