@@ -6,8 +6,8 @@ import me from '../../images/renz.jpg'
 import Modal from './instructionsModal'
 const useStyles = makeStyles({
     gridContainer: {
-        maxWidth: 1000,
-        width: 1000,
+        //maxWidth: 1000,
+        //width: 1000,
     },
     gridDetails: {
         paddingTop: 50,
@@ -105,8 +105,10 @@ const WelcomePage = (props) => {
                                             <Grid item lg={12} xs={12}>
                                                 <div style={{ width: 'inherit' }}>
                                                     <Typography className={classes.text} variant="body1">
-                                                        A simple e-commerce web application using <span className={classes.mongo}>MongoDB</span>,
-                                                    <span className={classes.react}> React</span>  <span className={classes.express}>Express</span>, and <span className={classes.nodeJs}>Node Js</span>.
+                                                        <span className={classes.mongo}>MongoDB</span>,
+                                                        <span className={classes.react}> React</span>,
+                                                        <span className={classes.express}> Express</span>, and
+                                                        <span className={classes.nodeJs}> Node Js</span>.
 
                                                 </Typography>
                                                 </div>
