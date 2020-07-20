@@ -196,7 +196,7 @@ const ShoppingCartPage = (props) => {
                                 </Grid>
                             </Card>
                         </Grid>
-                    )}
+                    ).reverse()}
                 </Grid> :
                     <Grid >
                         <Grid item xs={12}>

@@ -61,7 +61,6 @@ const ProfilePage = (props) => {
     const handleChangePassModal = () => {
         setChangePassModalState(!modalState)
     }
-
     return (
         <Container>
             <ChangePassModal ClearMsg={ClearMsg} profile={profile} auth={auth} ChangePass={ChangePass} state={changePassModalState} handleClose={handleCloseModal} />
@@ -89,7 +88,7 @@ const ProfilePage = (props) => {
                                         profile.purchases.item && profile.purchases.item.map((obj, ind) =>
                                             <Grid item lg={4} md={6} xs={12} key={ind}>
                                                 <CardComponent index={ind} handleModal={() => handleConfirmationModal(obj, ind)} RemoveItem={handleRemoveItem} data={obj} />
-                                            </Grid>)
+                                            </Grid>).reverse()
 
                                     }
                                 </Grid>
