@@ -10,17 +10,21 @@ import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 const useStyles = makeStyles({
     textField: {
-        maxWidth: 500
+        maxWidth: 500,
+
     },
     btn: {
         maxWidth: 500,
+
     },
     btnRegister: {
         color: '#1c6beb',
         maxWidth: 500
     },
     btnLoginGrid: {
-        paddingTop: 50
+        paddingTop: 50,
+        paddingLeft: 15,
+        paddingRight: 15
     },
     btnRegisterGrid: {
         paddingTop: 70
@@ -85,10 +89,10 @@ const LoginPage = (props) => {
     return (
         <Grid>
             <form onSubmit={handleLogin}>
-                <Grid style={{ paddingTop: 50 }} container justify="center" item xs={12}>
+                <Grid style={{ paddingTop: 50, paddingLeft: 15, paddingRight: 15 }} container justify="center" item xs={12}>
                     <TextField onFocus={handleFocus} error={errorText} onChange={(e) => setEmail(e.target.value)} fullWidth className={classes.textField} autoFocus placeholder="Email" label="Email" id="email" type="email" />
                 </Grid>
-                <Grid container justify="center" item xs={12} >
+                <Grid style={{ paddingLeft: 15, paddingRight: 15 }} container justify="center" item xs={12} >
                     <TextField
                         onFocus={handleFocus}
                         error={errorText}
